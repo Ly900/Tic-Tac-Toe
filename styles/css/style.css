@@ -10,10 +10,18 @@ body {
   font-size: 100%; }
 
 h1 {
-  padding: 5%; }
+  font-size: 4rem;
+  padding: 2%; }
 
 /**** VARIABLES ****/
 /**** MIXINS ****/
+div.main-game-div,
+h1 {
+  font-family: averia-sans-libre, sans-serif; }
+
+div.main-game-div {
+  padding: 5%; }
+
 .square {
   font-size: 4rem;
   text-align: center;

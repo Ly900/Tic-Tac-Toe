@@ -13,14 +13,14 @@ body {
 }
 
 h1 {
-  padding: 5%;
+  font-size: 4rem;
+  padding: 2%;
 }
 
 /**** VARIABLES ****/
 $gameBorder: 5px solid #FFC107;
 
 /**** MIXINS ****/
-
 @mixin borderRightBottom {
   border: {
     right: $gameBorder;
@@ -33,6 +33,15 @@ $gameBorder: 5px solid #FFC107;
     left: $gameBorder;
     bottom: $gameBorder;
   }
+}
+
+div.main-game-div,
+  h1 {
+  font-family: averia-sans-libre, sans-serif;
+}
+
+div.main-game-div {
+  padding: 5%;  
 }
 
 .square {
