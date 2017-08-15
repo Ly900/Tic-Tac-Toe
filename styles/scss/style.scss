@@ -1,3 +1,9 @@
+html, body, h1, div {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 html {
   font-size: 16px;
 }
@@ -6,36 +12,49 @@ body {
   font-size: 100%;
 }
 
+h1 {
+  padding: 5%;
+}
+
+/**** VARIABLES ****/
+$gameBorder: 5px solid #FFC107;
+
+/**** MIXINS ****/
+
+@mixin borderRightBottom {
+  border: {
+    right: $gameBorder;
+    bottom: $gameBorder;
+  }
+}
+
+@mixin borderLeftBottom {
+  border: {
+    left: $gameBorder;
+    bottom: $gameBorder;
+  }
+}
+
 .square {
   font-size: 4rem;
   text-align: center;
   min-height: 100px;
-  &.top-left {
-    border-right: 2px solid black;
-    border-bottom: 2px solid black;
-  }
-  &.top-center {
-    border-bottom: 2px solid black;
-  }
-  &.top-right {
-    border-left: 2px solid black;
-    border-bottom: 2px solid black;
-  }
+  &.top-left,
   &.left {
-    border-right: 2px solid black;
-    border-bottom: 2px solid black;
+    @include borderRightBottom;
   }
+  &.top-center,
   &.center {
-    border-bottom: 2px solid black;
+    border-bottom: $gameBorder;
   }
+  &.top-right,
   &.right {
-    border-left: 2px solid black;
-    border-bottom: 2px solid black;
+    @include borderLeftBottom;
   }
   &.bottom-left {
-    border-right: 2px solid black;
+    border-right: $gameBorder;
   }
   &.bottom-right {
-    border-left: 2px solid black;
+    border-left: $gameBorder;
   }
 }
