@@ -1,12 +1,23 @@
-html, body, h1, div {
+body,
+div,
+h1,
+html {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background: #F4F4F4;
 }
+/**** VARIABLES ****/
+$mainYellow: #FFC107;
+$lightGray: #F4F4F4;
+$gameBorder: 8px solid darken($lightGray, 10%);
 
 html {
   font-size: 16px;
+}
+
+body,
+html {
+  background-color: darken($lightGray, 10%);
 }
 
 body {
@@ -14,16 +25,20 @@ body {
 }
 
 h1 {
-  font-size: 4rem;
+  font: {
+    size: 4rem;
+    weight: bolder;
+  }
   padding: 2%;
-  margin-top: 2%;
-  font-weight: bolder;
+  margin-top: 5%;
+  margin-bottom: 5%;
   letter-spacing: 5px;
 }
+// Needed to keep game box borders from poking outside of game box and border
 
-/**** VARIABLES ****/
-$gameBorder: 5px solid black;
-
+.row {
+  margin: 0;
+}
 /**** MIXINS ****/
 @mixin borderRightBottom {
   border: {
@@ -31,7 +46,6 @@ $gameBorder: 5px solid black;
     bottom: $gameBorder;
   }
 }
-
 @mixin borderLeftBottom {
   border: {
     left: $gameBorder;
@@ -40,36 +54,47 @@ $gameBorder: 5px solid black;
 }
 
 div.main-game-div,
-  h1 {
-  // font-family: averia-sans-libre, sans-serif;
-  // font-family: 'Sedgwick Ave Display', cursive;
+h1 {
   font-family: 'Indie Flower', cursive;
 }
 
 div.main-game-div {
-  padding: 5%;
-}
+  .square {
+    font-size: 4rem;
+    text-align: center;
+    min-height: 100px;
+    background-color: darken($lightGray, 30%);
+    transition: 0.5s;
 
-.square {
-  font-size: 4rem;
-  text-align: center;
-  min-height: 100px;
-  &.top-left,
-  &.left {
-    @include borderRightBottom;
-  }
-  &.top-center,
-  &.center {
-    border-bottom: $gameBorder;
-  }
-  &.top-right,
-  &.right {
-    @include borderLeftBottom;
-  }
-  &.bottom-left {
-    border-right: $gameBorder;
-  }
-  &.bottom-right {
-    border-left: $gameBorder;
+    &:hover {
+      cursor: pointer;
+      background-color: $mainYellow;
+      color: #fff;
+      border: none !important;
+      transform: rotate(10deg);
+    }
+
+    &.left,
+    &.top-left {
+      @include borderRightBottom;
+    }
+
+    &.center,
+    &.top-center {
+      border-bottom: $gameBorder;
+    }
+
+    &.right,
+    &.top-right {
+      @include borderLeftBottom;
+    }
+
+    &.bottom-left {
+      border-right: $gameBorder;
+    }
+
+    &.bottom-right {
+      border-left: $gameBorder;
+    }
   }
 }
