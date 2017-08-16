@@ -11,13 +11,16 @@ body {
 
 h1 {
   font-size: 4rem;
-  padding: 2%; }
+  padding: 2%;
+  margin-top: 2%;
+  font-weight: bolder;
+  letter-spacing: 5px; }
 
 /**** VARIABLES ****/
 /**** MIXINS ****/
 div.main-game-div,
 h1 {
-  font-family: averia-sans-libre, sans-serif; }
+  font-family: 'Indie Flower', cursive; }
 
 div.main-game-div {
   padding: 5%; }
