@@ -31,16 +31,16 @@ div.main-game-div {
   text-align: center;
   min-height: 100px; }
   .square.top-left, .square.left {
-    border-right: 5px solid #FFB300;
-    border-bottom: 5px solid #FFB300; }
+    border-right: 5px solid #FF5722;
+    border-bottom: 5px solid #FF5722; }
   .square.top-center, .square.center {
-    border-bottom: 5px solid #FFB300; }
+    border-bottom: 5px solid #FF5722; }
   .square.top-right, .square.right {
-    border-left: 5px solid #FFB300;
-    border-bottom: 5px solid #FFB300; }
+    border-left: 5px solid #FF5722;
+    border-bottom: 5px solid #FF5722; }
   .square.bottom-left {
-    border-right: 5px solid #FFB300; }
+    border-right: 5px solid #FF5722; }
   .square.bottom-right {
-    border-left: 5px solid #FFB300; }
+    border-left: 5px solid #FF5722; }
 
 /*# sourceMappingURL=style.css.map */
