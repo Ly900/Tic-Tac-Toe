@@ -54,14 +54,14 @@ h1 {
   }
 }
 
-div.main-game-div,
+div#main-game-div,
 h1 {
   font-family: 'Indie Flower', cursive;
 }
 
-div.main-game-div {
+div#main-game-div {
   .square {
-    font-size: 4rem;
+    font-size: 3.5rem;
     text-align: center;
     min-height: 100px;
     background-color: darken($lightGray, 30%);

@@ -1,29 +1,59 @@
 "use strict";
 
-var counter = 0,
-  gameContainer = document.getElementsByClassName("main-game-div")[0];
+var gameContainer = document.getElementById("main-game-div");
 
-//Each click adds to counter
-gameContainer.addEventListener("click", markSquare);
+/***** GAME CONTROLLER *****/
+var gameController = (function() {
+  var counter = 0,
+    currentPlayer = undefined;
 
-function increaseCounter() {
-  counter++;
-}
-
-function markSquare(e) {
-  if (counter % 2 != 0) {
-    console.log("Player 1");
-    e.target.innerHTML = "X";
-  } else {
-    console.log("Player 2");
-    e.target.innerHTML = "O";
+  function startGame() {
+    console.log("started");
+    checkForClick();
   }
 
-  increaseCounter();
+  function checkForClick() {
+    gameContainer.addEventListener("click", playGame);
+  }
+
+  function playGame() {
+    console.log("Playing");
+    increaseCounter();
+    choosePlayer();
+  }
+
+  function increaseCounter() {
+    counter++;
+    console.log("Counter: " + counter);
+  };
+
+  function choosePlayer() {
+    currentPlayer = counter % 2 !=0 ? 1 : 2;
+    console.log("Current Player:" + currentPlayer);
+  };
+
+  return {
+    counter: counter,
+    gameContainer: gameContainer,
+    startGame: startGame
+  };
+
+})();
+
+/***** INDIVIDUAL GAME CARD *****/
+var gameCard = {
+  filled: false,
+  filledMark: null,
+  markCard: function() {
+    if (!this.filled) {
+      if (gameController.currentPlayer == 1) {
+        console.log(gameController.currentPlayer);
+      } else {
+        console.log(gameController.currentPlayer);
+      }
+    }
+    console.log("This card has already been marked!");
+  }
 }
 
-//If odd click, it's Player 1
-//Display an X.
-
-//If even click, it's Player 2
-//Display an O.
+gameController.startGame();
