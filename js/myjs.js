@@ -2,22 +2,41 @@
 
 var gameContainer = document.getElementById("main-game-div");
 
-/***** GAME CONTROLLER *****/
-var gameController = (function() {
-  var counter = 0,
+/***** INDIVIDUAL GAME CARD *****/
+var gameCard = (function() {
+  var filled = false,
+    filledMark = null,
+    counter = 0,
     currentPlayer = undefined;
 
   function startGame() {
-    console.log("started");
+    console.log("Game started by card!");
     checkForClick();
   }
 
   function checkForClick() {
-    gameContainer.addEventListener("click", playGame);
+    gameContainer.addEventListener("click", isCardFilled);
   }
 
-  function playGame() {
-    console.log("Playing");
+  function isCardFilled() {
+    var cardClicked = event.target,
+    cardAleadyFilled = cardClicked.classList.contains("filled");
+
+    if (cardAleadyFilled) {
+      console.log("This card has already been filled!");
+    } else {
+      markCard(cardClicked);
+    }
+  }
+
+  function markCard(cardClicked) {
+    cardClicked.classList.add("filled");
+    if (choosePlayer() === 1) {
+      cardClicked.innerHTML = "O";
+    } else {
+      cardClicked.innerHTML = "X";
+    }
+    checkForWin();
     increaseCounter();
     choosePlayer();
   }
@@ -28,32 +47,19 @@ var gameController = (function() {
   };
 
   function choosePlayer() {
-    currentPlayer = counter % 2 !=0 ? 1 : 2;
+    currentPlayer = counter % 2 != 0 ? 1 : 2;
     console.log("Current Player:" + currentPlayer);
+    return currentPlayer;
   };
 
+  function checkForWin() {
+    
+  }
+
   return {
-    counter: counter,
-    gameContainer: gameContainer,
     startGame: startGame
-  };
+  }
 
 })();
 
-/***** INDIVIDUAL GAME CARD *****/
-var gameCard = {
-  filled: false,
-  filledMark: null,
-  markCard: function() {
-    if (!this.filled) {
-      if (gameController.currentPlayer == 1) {
-        console.log(gameController.currentPlayer);
-      } else {
-        console.log(gameController.currentPlayer);
-      }
-    }
-    console.log("This card has already been marked!");
-  }
-}
-
-gameController.startGame();
+gameCard.startGame();

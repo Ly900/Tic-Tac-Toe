@@ -47,8 +47,10 @@ div#main-game-div .square {
     border: none !important;
     transform: rotate(10deg);
     opacity: 1; }
-    div#main-game-div .square:hover:active {
-      background-color: #03A9F4; }
+  div#main-game-div .square:active {
+    background-color: #03A9F4; }
+  div#main-game-div .square.filled {
+    background-color: #f1f1f1; }
   div#main-game-div .square.left, div#main-game-div .square.top-left {
     border-right: 8px solid #dbdbdb;
     border-bottom: 8px solid #dbdbdb; }
