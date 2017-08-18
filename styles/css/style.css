@@ -43,7 +43,6 @@ div#main-game-div .square {
   div#main-game-div .square:hover {
     cursor: pointer;
     background-color: #FFC107;
-    color: #fff;
     border: none !important;
     transform: rotate(10deg);
     opacity: 1; }
