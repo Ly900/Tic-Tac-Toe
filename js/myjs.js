@@ -27,25 +27,28 @@ var gameCard = (function() {
     checkForClick();
   }
 
+  // Add click event to entire board.
   function checkForClick() {
     gameContainer.addEventListener("click", isCardFilled);
   }
 
+  /* If card is empty...
+  - adds style to card to show it's been played,
+  - increases counter that determines which player's turn it is, and
+  - marks the card an X or O depending on which player's turn it is.
+  */
   function isCardFilled() {
     var cardClicked = event.target;
     var cardAleadyFilled = cardClicked.classList.contains("filled");
     var cardId = Number(cardClicked.id);
 
     if (cardAleadyFilled) {
-      console.log("This card has already been filled!");
-      return true;
-
+      console.log("Please choose another card.");
       // If card is NOT yet filled...
     } else {
       addClickedCardStyles(cardClicked);
       increaseCounter();
       markCard(cardClicked, cardId);
-      return false;
     }
   }
 
@@ -68,27 +71,19 @@ var gameCard = (function() {
   function markCard(cardClicked, cardId) {
     if (currentPlayer === 1) {
       cardClicked.innerHTML = "X";
+      storeCard(cardId, p1Cards);
     } else {
       cardClicked.innerHTML = "O";
+      storeCard(cardId, p2Cards);
     }
-    storeCard(cardId);
   }
 
-  function storeCard(cardId) {
-    if (currentPlayer === 1) {
-      p1Cards.push(cardId);
-      sortCards(p1Cards);
-      if (p1Cards.length >= 3) {
-        var lastThree = get3ValuesInArray(p1Cards);
-        compareToWinningCombos(lastThree);
-      }
-    } else {
-      p2Cards.push(cardId);
-      sortCards(p2Cards);
-      if (p2Cards.length >= 3) {
-        var lastThree = get3ValuesInArray(p2Cards);
-        compareToWinningCombos(lastThree);
-      }
+  function storeCard(cardId, currentPlayersCards) {
+    currentPlayersCards.push(cardId);
+    sortCards(currentPlayersCards);
+    if (currentPlayersCards.length >= 3) {
+      var lastThree = get3ValuesInArray(currentPlayersCards);
+      compareToWinningCombos(lastThree);
     }
   }
 
@@ -111,7 +106,7 @@ var gameCard = (function() {
       var singleWinningCombo = winningCombos[i];
       var hasWin = compareArrays(lastThree, singleWinningCombo);
       if (hasWin) {
-        console.log("Player " + currentPlayer + " win!");
+        alert("Player " + currentPlayer + " win!");
         break;
       }
     }
