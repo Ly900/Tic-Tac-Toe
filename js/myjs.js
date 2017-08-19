@@ -8,7 +8,19 @@ var gameCard = (function() {
     filledMark = null,
     counter = 0,
     currentPlayer = 1,
-    gameContainer = document.getElementById("main-game-div");
+    gameContainer = document.getElementById("main-game-div"),
+    p1Cards = [],
+    p2Cards = [],
+    winningCombos = [
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+      [1, 4, 7],
+      [2, 5, 8],
+      [3, 6, 9],
+      [1, 5, 9],
+      [3, 5, 7]
+    ];
 
   function startGame() {
     console.log("Game started by card!");
@@ -64,35 +76,37 @@ var gameCard = (function() {
 
   function storeCard(cardId) {
     if (currentPlayer === 1) {
-      gameController.player1Cards.push(cardId);
-      console.table("Player 1's cards: ");
-      console.log(gameController.player1Cards);
+      p1Cards.push(cardId);
+      sortCards(p1Cards);
     } else {
-      gameController.player2Cards.push(cardId);
-      console.log("Player 2's cards: ");
-      console.log(gameController.player2Cards);
+      p2Cards.push(cardId);
+      sortCards(p2Cards);
     }
     checkForWin();
   }
 
+  function sortCards(cardArray) {
+    cardArray.sort(function(a, b) {
+      return a - b;
+    });
+  }
+
   function checkForWin() {
+    if (currentPlayer === 1) {
+
+      console.log(p1Cards);
+
+    } else {
+
+      console.log(p2Cards);
+
+    }
 
   }
 
   return {
     startGame: startGame
   }
-
-})();
-
-var gameController = (function() {
-  var player1Cards = [],
-    player2Cards = [];
-
-  return {
-    player1Cards: player1Cards,
-    player2Cards: player2Cards
-  };
 
 })();
 
