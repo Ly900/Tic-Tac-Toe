@@ -34,7 +34,7 @@ var gameCard = (function() {
   function isCardFilled() {
     var cardClicked = event.target;
     var cardAleadyFilled = cardClicked.classList.contains("filled");
-    var cardId = cardClicked.id;
+    var cardId = Number(cardClicked.id);
 
     if (cardAleadyFilled) {
       console.log("This card has already been filled!");
@@ -92,13 +92,23 @@ var gameCard = (function() {
   }
 
   function checkForWin() {
-    if (currentPlayer === 1) {
-
+    if (currentPlayer === 1 && p1Cards.length >= 3) {
       console.log(p1Cards);
 
-    } else {
+      var temp = [];
 
-      console.log(p2Cards);
+
+      for (var i = 0; i < winningCombos.length; i++) {
+        console.log(winningCombos[i]);
+      }
+
+      // for (var i = 0; i < winningCombos.length; i++) {
+      //   if (winningCombos.indexOf(p1Cards[i])) {
+      //     console.log(p1Cards[i]);
+      //   }
+      // }
+
+    } else {
 
     }
 
