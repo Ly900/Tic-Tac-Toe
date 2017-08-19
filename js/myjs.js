@@ -23,7 +23,7 @@ var gameCard = (function() {
     ];
 
   function startGame() {
-    console.log("Game started by card!");
+    // console.log("Game started by card!");
     checkForClick();
   }
 
@@ -56,13 +56,13 @@ var gameCard = (function() {
 
   function increaseCounter() {
     counter++;
-    console.log("Counter: " + counter);
+    // console.log("Counter: " + counter);
     choosePlayer();
   };
 
   function choosePlayer() {
     currentPlayer = counter % 2 != 0 ? 1 : 2;
-    console.log("Current player: " + currentPlayer);
+    // console.log("Current player: " + currentPlayer);
   };
 
   function markCard(cardClicked, cardId) {
@@ -78,11 +78,18 @@ var gameCard = (function() {
     if (currentPlayer === 1) {
       p1Cards.push(cardId);
       sortCards(p1Cards);
+      if (p1Cards.length >= 3) {
+        var lastThree = get3ValuesInArray(p1Cards);
+        compareToWinningCombos(lastThree);
+      }
     } else {
       p2Cards.push(cardId);
       sortCards(p2Cards);
+      if (p2Cards.length >= 3) {
+        var lastThree = get3ValuesInArray(p2Cards);
+        compareToWinningCombos(lastThree);
+      }
     }
-    checkForWin();
   }
 
   function sortCards(cardArray) {
@@ -91,26 +98,43 @@ var gameCard = (function() {
     });
   }
 
-  function checkForWin() {
-    if (currentPlayer === 1 && p1Cards.length >= 3) {
-      console.log(p1Cards);
-
-      var temp = [];
-
-
-      for (var i = 0; i < winningCombos.length; i++) {
-        console.log(winningCombos[i]);
-      }
-
-      // for (var i = 0; i < winningCombos.length; i++) {
-      //   if (winningCombos.indexOf(p1Cards[i])) {
-      //     console.log(p1Cards[i]);
-      //   }
-      // }
-
-    } else {
-
+  function get3ValuesInArray(array) {
+    var tempArray = [];
+    for (var i = array.length - 3; i < array.length; i++) {
+      tempArray.push(array[i]);
     }
+    return tempArray;
+  }
+
+  function compareToWinningCombos(lastThree) {
+    for (var i = 0; i < winningCombos.length; i++) {
+      var singleWinningCombo = winningCombos[i];
+      var hasWin = compareArrays(lastThree, singleWinningCombo);
+      if (hasWin) {
+        console.log("Player " + currentPlayer + " win!");
+        break;
+      }
+    }
+  }
+
+  function compareArrays(lastThree, singleWinningCombo) {
+
+    var foundWin = false;
+
+    // console.log("Last Three: ", lastThree);
+    // console.log("Single Winning Combo: ", singleWinningCombo);
+
+    if (
+      lastThree[0] === singleWinningCombo[0] &&
+      lastThree[1] === singleWinningCombo[1] &&
+      lastThree[2] === singleWinningCombo[2]
+    ) {
+      console.log("They match.");
+      foundWin = true;
+      return foundWin;
+    }
+    return foundWin;
+
 
   }
 
