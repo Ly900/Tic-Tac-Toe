@@ -1,13 +1,14 @@
 "use strict";
 
-var gameContainer = document.getElementById("main-game-div");
+// var gameContainer = document.getElementById("main-game-div");
 
 /***** INDIVIDUAL GAME CARD *****/
 var gameCard = (function() {
   var filled = false,
     filledMark = null,
     counter = 0,
-    currentPlayer = 1;
+    currentPlayer = 1,
+    gameContainer = document.getElementById("main-game-div");
 
   function startGame() {
     console.log("Game started by card!");
@@ -19,21 +20,20 @@ var gameCard = (function() {
   }
 
   function isCardFilled() {
-    var cardClicked = event.target,
-      cardAleadyFilled = cardClicked.classList.contains("filled"),
-      // The span below contains the id of the card to use in the player's array to check for win.
-      boxWithId = cardClicked.children[0],
-      cardId = boxWithId.id;
-    console.log("Card id: " + cardId);
+    var cardClicked = event.target;
+    var cardAleadyFilled = cardClicked.classList.contains("filled");
+    var cardId = cardClicked.id;
 
     if (cardAleadyFilled) {
       console.log("This card has already been filled!");
+      return true;
 
       // If card is NOT yet filled...
     } else {
       addClickedCardStyles(cardClicked);
       increaseCounter();
-      markCard(cardClicked, boxWithId);
+      markCard(cardClicked, cardId);
+      return false;
     }
   }
 
@@ -53,22 +53,22 @@ var gameCard = (function() {
     console.log("Current player: " + currentPlayer);
   };
 
-  function markCard(cardClicked, boxWithId) {
+  function markCard(cardClicked, cardId) {
     if (currentPlayer === 1) {
-      boxWithId.innerHTML = "X";
+      cardClicked.innerHTML = "X";
     } else {
-      boxWithId.innerHTML = "O";
+      cardClicked.innerHTML = "O";
     }
-    storeCard(boxWithId);
+    storeCard(cardId);
   }
 
-  function storeCard(boxWithId) {
+  function storeCard(cardId) {
     if (currentPlayer === 1) {
-      gameController.player1Cards.push(boxWithId.id);
-      console.log("Player 1's cards: ");
+      gameController.player1Cards.push(cardId);
+      console.table("Player 1's cards: ");
       console.log(gameController.player1Cards);
     } else {
-      gameController.player2Cards.push(boxWithId.id);
+      gameController.player2Cards.push(cardId);
       console.log("Player 2's cards: ");
       console.log(gameController.player2Cards);
     }
