@@ -37,15 +37,19 @@ div#main-game-div .square {
   font-size: 3.5rem;
   text-align: center;
   min-height: 100px;
-  background-color: #a8a8a8;
   transition: 0.5s;
+  background-color: #a8a8a8;
   opacity: 0.8; }
-  div#main-game-div .square:hover {
+  div#main-game-div .square.hover {
     cursor: pointer;
     background-color: #FFC107;
     border: none !important;
     transform: rotate(10deg);
     opacity: 1; }
+  div#main-game-div .square.hoverGameEnded {
+    transform: none;
+    opacity: 0.8;
+    background-color: #a8a8a8; }
   div#main-game-div .square:active {
     background-color: #03A9F4; }
   div#main-game-div .square.filled {

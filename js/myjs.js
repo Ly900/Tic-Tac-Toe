@@ -1,9 +1,5 @@
-"use strict";
-
-// var gameContainer = document.getElementById("main-game-div");
-
-/***** INDIVIDUAL GAME CARD *****/
 var gameCard = (function() {
+  "use strict";
   var filled = false,
     filledMark = null,
     counter = 0,
@@ -20,16 +16,33 @@ var gameCard = (function() {
       [3, 6, 9],
       [1, 5, 9],
       [3, 5, 7]
-    ];
+    ],
+    gameSquares = document.querySelectorAll("div.square");
 
   function startGame() {
-    // console.log("Game started by card!");
     checkForClick();
+    addHoverEventsDuringGame();
   }
 
   // Add click event to entire board.
   function checkForClick() {
     gameContainer.addEventListener("click", isCardFilled);
+  }
+
+  function addHoverEventsDuringGame() {
+    for (var i = 0; i < gameSquares.length; i++) {
+      gameSquares[i] = this;
+      gameSquares[i].addEventListener("mouseover", function() {
+        this.classList.add("hover");
+      }, false);
+      gameSquares[i].addEventListener("mouseout", function() {
+        this.classList.remove("hover");
+      }, false);
+    }
+  }
+
+  function addHoverStyles() {
+    console.log("Moused over");
   }
 
   /* If card is empty...
@@ -106,19 +119,27 @@ var gameCard = (function() {
       var singleWinningCombo = winningCombos[i];
       var hasWin = compareArrays(lastThree, singleWinningCombo);
       if (hasWin) {
-        alert("Player " + currentPlayer + " win!");
+        setTimeout(declareWinner, 1000);
+        gameEndEvents();
         break;
       }
     }
   }
 
+  function declareWinner() {
+    alert("Player " + currentPlayer + " win!");
+  }
+
+  function gameEndEvents() {
+    gameContainer.removeEventListener("click", isCardFilled);
+
+    addHoverEventGameEnded();
+
+  }
+
   function compareArrays(lastThree, singleWinningCombo) {
 
     var foundWin = false;
-
-    // console.log("Last Three: ", lastThree);
-    // console.log("Single Winning Combo: ", singleWinningCombo);
-
     if (
       lastThree[0] === singleWinningCombo[0] &&
       lastThree[1] === singleWinningCombo[1] &&
@@ -129,8 +150,15 @@ var gameCard = (function() {
       return foundWin;
     }
     return foundWin;
+  }
 
-
+  function addHoverEventGameEnded() {
+    for (var i = 0; i < gameSquares.length; i++) {
+      gameSquares[i] = this;
+      gameSquares[i].addEventListener("mouseover", function() {
+        this.classList.remove("hover");
+      }, false);
+    }
   }
 
   return {

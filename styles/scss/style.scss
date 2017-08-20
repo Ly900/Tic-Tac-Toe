@@ -66,19 +66,38 @@ div#main-game-div {
     font-size: 3.5rem;
     text-align: center;
     min-height: 100px;
-    background-color: darken($lightGray, 30%);
     transition: 0.5s;
+    background-color: darken($lightGray, 30%);
     opacity: 0.8;
-    &:hover {
+    // &:hover {
+    //   cursor: pointer;
+    //   background-color: $mainYellow;
+    //   border: none !important;
+    //   transform: rotate(10deg);
+    //   opacity: 1;
+    // }
+    // &.regular {
+    //   background-color: darken($lightGray, 30%);
+    //   opacity: 0.8;
+    // }
+    &.hover {
       cursor: pointer;
       background-color: $mainYellow;
       border: none !important;
       transform: rotate(10deg);
       opacity: 1;
     }
+
+    &.hoverGameEnded {
+      transform: none;
+      opacity: 0.8;
+      background-color: darken($lightGray, 30%);
+    }
+
     &:active {
       background-color: $lightBlue;
     }
+
     &.filled {
       background-color: darken($lightGray, 1%);
     }
