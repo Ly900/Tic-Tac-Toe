@@ -126,7 +126,6 @@ var gameCard = (function() {
           numMatches++;
           if (numMatches === 3) {
             foundWin = true;
-            console.log(currentPlayer + " wins!");
             declareWinner(singleWinningCombo);
             foundWin = true;
           }
@@ -138,6 +137,7 @@ var gameCard = (function() {
 
   function declareWinner(singleWinningCombo) {
     console.log("Winning cards: " + singleWinningCombo);
+    console.log("Player " + currentPlayer + " wins!");
     gameEndEvents(singleWinningCombo);
   }
 
