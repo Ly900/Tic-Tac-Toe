@@ -69,17 +69,6 @@ div#main-game-div {
     transition: 0.5s;
     background-color: darken($lightGray, 30%);
     opacity: 0.8;
-    // &:hover {
-    //   cursor: pointer;
-    //   background-color: $mainYellow;
-    //   border: none !important;
-    //   transform: rotate(10deg);
-    //   opacity: 1;
-    // }
-    // &.regular {
-    //   background-color: darken($lightGray, 30%);
-    //   opacity: 0.8;
-    // }
     &.hover {
       cursor: pointer;
       background-color: $mainYellow;
@@ -87,13 +76,19 @@ div#main-game-div {
       transform: rotate(10deg);
       opacity: 1;
     }
-
     &.hoverGameEnded {
       transform: none;
       opacity: 0.8;
       background-color: darken($lightGray, 30%);
     }
-
+    &.x-win-card {
+      background-color: $xPlayerColor;
+      color: #fff;
+    }
+    &.o-win-card {
+      background-color: $oPlayerColor;
+      color: #fff;
+    }
     &:active {
       background-color: $lightBlue;
     }

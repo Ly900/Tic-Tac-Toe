@@ -95,8 +95,7 @@ var gameCard = (function() {
     currentPlayersCards.push(cardId);
     sortCards(currentPlayersCards);
     if (currentPlayersCards.length >= 3) {
-      var lastThree = get3ValuesInArray(currentPlayersCards);
-      compareToWinningCombos(lastThree);
+      getSingleWinningCombo();
     }
   }
 
@@ -106,50 +105,50 @@ var gameCard = (function() {
     });
   }
 
-  function get3ValuesInArray(array) {
-    var tempArray = [];
-    for (var i = array.length - 3; i < array.length; i++) {
-      tempArray.push(array[i]);
+  function getSingleWinningCombo() {
+    var singleWinningCombo = [];
+    for (var i = 0; i < winningCombos.length; i++) {
+      singleWinningCombo = winningCombos[i];
+      var hasWin = compareArrays(singleWinningCombo);
+      if (hasWin) break;
     }
-    return tempArray;
   }
 
-  function compareToWinningCombos(lastThree) {
-    for (var i = 0; i < winningCombos.length; i++) {
-      var singleWinningCombo = winningCombos[i];
-      var hasWin = compareArrays(lastThree, singleWinningCombo);
-      if (hasWin) {
-        setTimeout(declareWinner, 1000);
-        gameEndEvents();
-        break;
+  function compareArrays(singleWinningCombo) {
+    var foundWin = false,
+      numMatches = 0;
+
+    var playerCards = currentPlayer === 1 ? p1Cards : p2Cards;
+
+    for (var i = 0; i < singleWinningCombo.length; i++) {
+      for (var j = 0; j < playerCards.length; j++) {
+        if (singleWinningCombo[i] === playerCards[j]) {
+          numMatches++;
+          if (numMatches === 3) {
+            foundWin = true;
+            console.log(currentPlayer + " wins!");
+            declareWinner(singleWinningCombo);
+            foundWin = true;
+          }
+        }
       }
     }
+    return foundWin;
   }
 
-  function declareWinner() {
-    alert("Player " + currentPlayer + " win!");
+  function declareWinner(singleWinningCombo) {
+    console.log("Winning cards: " + singleWinningCombo);
+    gameEndEvents(singleWinningCombo);
   }
 
-  function gameEndEvents() {
+  function gameEndEvents(singleWinningCombo) {
     gameContainer.removeEventListener("click", isCardFilled);
 
     addHoverEventGameEnded();
-
-  }
-
-  function compareArrays(lastThree, singleWinningCombo) {
-
-    var foundWin = false;
-    if (
-      lastThree[0] === singleWinningCombo[0] &&
-      lastThree[1] === singleWinningCombo[1] &&
-      lastThree[2] === singleWinningCombo[2]
-    ) {
-      console.log("They match.");
-      foundWin = true;
-      return foundWin;
-    }
-    return foundWin;
+    flickerWinningBoxes(singleWinningCombo);
+    setTimeout(function() {
+      alert("Player " + currentPlayer + " wins!")
+    }, 500);
   }
 
   function addHoverEventGameEnded() {
@@ -159,6 +158,25 @@ var gameCard = (function() {
         this.classList.remove("hover");
       }, false);
     }
+  }
+
+  function flickerWinningBoxes(singleWinningCombo) {
+    var winningCards = singleWinningCombo;
+
+    for (var i = 0; i < winningCards.length; i++) {
+
+      var winningCard = document.getElementById(winningCards[i]);
+
+      winningCard.classList.remove("filled");
+
+      if (currentPlayer === 1) {
+        winningCard.classList.add("x-win-card");
+      } else {
+        winningCard.classList.add("o-win-card");
+      }
+
+    }
+
   }
 
   return {
