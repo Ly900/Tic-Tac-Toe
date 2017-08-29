@@ -1,4 +1,4 @@
-# Tic-Tac-Toe(https://github.com/Ly900/Tic-Tac-Toe)
+# [Tic-Tac-Toe](https://ly900.github.io/Tic-Tac-Toe/index.html)
 
 ### Current Bugs
 * User should not be able to put an "X" or "O" outside of game cards/boxes.
