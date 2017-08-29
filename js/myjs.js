@@ -51,17 +51,19 @@ var gameCard = (function() {
   - marks the card an X or O depending on which player's turn it is.
   */
   function isCardFilled() {
-    var cardClicked = event.target;
-    var cardAleadyFilled = cardClicked.classList.contains("filled");
-    var cardId = Number(cardClicked.id);
-
-    if (cardAleadyFilled) {
-      console.log("Please choose another card.");
-      // If card is NOT yet filled...
-    } else {
-      addClickedCardStyles(cardClicked);
-      increaseCounter();
-      markCard(cardClicked, cardId);
+    var cardClicked = $(event.target);
+    if (cardClicked.is("div.square")) {
+      cardClicked = cardClicked[0];
+      var cardAleadyFilled = cardClicked.classList.contains("filled");
+      var cardId = Number(cardClicked.id);
+      if (cardAleadyFilled) {
+        console.log("Please choose another card.");
+        // If card is NOT yet filled...
+      } else {
+        addClickedCardStyles(cardClicked);
+        increaseCounter();
+        markCard(cardClicked, cardId);
+      }
     }
   }
 
